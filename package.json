@@ -1,0 +1,16 @@
+{
+    "name": "dugun-notifications",
+    "description": "Controls toaster notifications.",
+    "authors": [
+        "Ege Sertçetin"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/duguncom/dugun-notifications.git"
+    },
+    "homepage": "https://github.com/duguncom/dugun-notifications",
+    "dependencies": {
+        "gulp": "^3.9.0",
+        "gulp-concat": "^2.3.3"
+    }
+}
