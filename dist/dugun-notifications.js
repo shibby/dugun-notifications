@@ -6,7 +6,9 @@ function DugunNotifications(toaster) {
     var service = {};
 
     service.error = function(http) {
-        if(http.status === 500) {
+        if(typeof http === 'string') {
+            return customError(http);
+        } else if(http.status === 500) {
             return serverError();
         } else if(http.status === 422) {
             return validationErrors(http.data);
@@ -40,6 +42,10 @@ function DugunNotifications(toaster) {
 
     function notFoundError() {
         return showAlert('error', 'Böyle bir kayıt bulunamadı', 'Hata');
+    }
+
+    function customError(message) {
+        return showAlert('error', message);
     }
 
     function showAlert(type, text, header) {
