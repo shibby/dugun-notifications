@@ -26,6 +26,10 @@ function DugunNotifications(toaster) {
     }
 
     function validationErrors(data) {
+        if(data.message && data.errors.length === 0) {
+            showAlert('error', data.message);
+            return;
+        }
         for(var i in data.errors) {
             showAlert('error', data.errors[i].message, data.errors[i].path);
         }
