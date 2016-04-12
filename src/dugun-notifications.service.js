@@ -1,4 +1,4 @@
-function DugunNotifications(toaster) {
+function DugunNotifications(toaster, dgNotificationsConfig) {
     var service = {};
 
     service.error = function(http) {
@@ -18,11 +18,11 @@ function DugunNotifications(toaster) {
     };
 
     service.success = function(text, header) {
-        return showAlert('success', header || 'Başarılı', text || '');
+        return showAlert('success', header || dgNotificationsConfig.translations.SUCCESS, text || '');
     };
 
     function serverError() {
-        return showAlert('error', 'Sunucuda bir hata oluştu');
+        return showAlert('error', dgNotificationsConfig.translations.HTTP_500);
     }
 
     function validationErrors(data) {
@@ -37,11 +37,11 @@ function DugunNotifications(toaster) {
     }
 
     function forbiddenError() {
-        return showAlert('error', 'Bu işlem için yetkiniz yok', 'Hata');
+        return showAlert('error', dgNotificationsConfig.translations.HTTP_403, dgNotificationsConfig.translations.ERROR);
     }
 
     function notFoundError() {
-        return showAlert('error', 'Böyle bir kayıt bulunamadı', 'Hata');
+        return showAlert('error', dgNotificationsConfig.translations.HTTP_404, dgNotificationsConfig.translations.ERROR);
     }
 
     function customError(message) {
@@ -49,7 +49,7 @@ function DugunNotifications(toaster) {
     }
 
     function showAlert(type, text, header) {
-        return toaster.pop(type, header || 'Hata', text);
+        return toaster.pop(type, header || dgNotificationsConfig.translations.ERROR, text);
     }
 
     return service;
@@ -57,6 +57,7 @@ function DugunNotifications(toaster) {
 
 DugunNotifications.$inject = [
     'toaster',
+    'dgNotificationsConfig',
 ];
 
 angular.module('dugun.notifications')

@@ -12,3 +12,5 @@ gulp.task('compress', function() {
         .pipe(gulpConcat('dugun-notifications.js'))
         .pipe(gulp.dest('dist/'));
 });
+
+gulp.task('default', ['compress']);
