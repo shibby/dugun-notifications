@@ -1,3 +1,7 @@
+angular.module('dugun.notifications', [
+    'toaster'
+]);
+
 angular.module('dugun.notifications').constant('dgNotificationsConfig', {
     translations: {
         'ERROR': 'Error',
@@ -7,10 +11,6 @@ angular.module('dugun.notifications').constant('dgNotificationsConfig', {
         'HTTP_404': 'Not found'
     }
 });
-
-angular.module('dugun.notifications', [
-    'toaster'
-]);
 
 function DugunNotifications(toaster, dgNotificationsConfig) {
     var service = {};
