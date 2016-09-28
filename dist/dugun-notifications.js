@@ -1,3 +1,13 @@
+angular.module('dugun.notifications').constant('dgNotificationsConfig', {
+    translations: {
+        'ERROR': 'Error',
+        'SUCCESS': 'Success',
+        'HTTP_500': 'Server error',
+        'HTTP_403': 'You do not have permission to do this',
+        'HTTP_404': 'Not found'
+    }
+});
+
 angular.module('dugun.notifications', [
     'toaster'
 ]);
@@ -40,7 +50,7 @@ function DugunNotifications(toaster, dgNotificationsConfig) {
             }
         }
         if (data) {
-            /** this is for laravel validation response. i is name of field. */
+            /** this is for laravel5.x validation response. i is name of field. */
             for (var i in data) {
                 for (var j in data[i]) {
                     showAlert('error', data[i][j], i);

@@ -4,6 +4,7 @@ var gulpConcat = require('gulp-concat');
 gulp.task('compress', function() {
     console.info('Compressing scripts');
     var source = [
+        'src/config.js',
         'src/dugun-notifications.module.js',
         'src/dugun-notifications.service.js',
     ];
