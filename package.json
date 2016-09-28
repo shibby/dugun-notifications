@@ -1,6 +1,7 @@
 {
     "name": "dugun-notifications",
     "description": "Controls toaster notifications.",
+    "license": "GPL-2.0",
     "authors": [
         "Ege Sertçetin"
     ],
