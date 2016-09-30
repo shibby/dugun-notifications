@@ -2,26 +2,36 @@ angular.module('dugun.notifications', [
     'toaster'
 ]);
 
+angular.module('dugun.notifications').constant('dgNotificationsConfig', {
+    translations: {
+        'ERROR': 'Error',
+        'SUCCESS': 'Success',
+        'HTTP_500': 'Server error',
+        'HTTP_403': 'You do not have permission to do this',
+        'HTTP_404': 'Not found'
+    }
+});
+
 function DugunNotifications(toaster, dgNotificationsConfig) {
     var service = {};
 
-    service.error = function(http) {
-        if(typeof http === 'string') {
+    service.error = function (http) {
+        if (typeof http === 'string') {
             return customError(http);
-        } else if(http.status === 500) {
+        } else if (http.status === 500) {
             return serverError();
-        } else if(http.status === 422) {
+        } else if (http.status === 422) {
             return validationErrors(http.data);
-        } else if(http.status === 403) {
+        } else if (http.status === 403) {
             return forbiddenError();
-        } else if(http.status === 404) {
+        } else if (http.status === 404) {
             return notFoundError();
-        } else if(http.status === 405) {
+        } else if (http.status === 405) {
             return forbiddenError();
         }
     };
 
-    service.success = function(text, header) {
+    service.success = function (text, header) {
         return showAlert('success', header || dgNotificationsConfig.translations.SUCCESS, text || '');
     };
 
@@ -30,13 +40,28 @@ function DugunNotifications(toaster, dgNotificationsConfig) {
     }
 
     function validationErrors(data) {
-        if(data.message && data.errors.length === 0) {
+        if (data.message && data.errors.length === 0) {
             showAlert('error', data.message);
             return;
         }
-        for(var i in data.errors) {
-            showAlert('error', data.errors[i].message, data.errors[i].path);
+        if (data.errors) {
+            for (var i in data.errors) {
+                showAlert('error', data.errors[i].message, data.errors[i].path);
+            }
         }
+        if(data.messages){
+            /** for laravel 4.2 */
+            data = data.messages;
+        }
+        if (data) {
+            /** this is for laravel5.x validation response. i is name of field. */
+            for (var i in data) {
+                for (var j in data[i]) {
+                    showAlert('error', data[i][j], i);
+                }
+            }
+        }
+
         return;
     }
 

@@ -5,6 +5,7 @@ gulp.task('compress', function() {
     console.info('Compressing scripts');
     var source = [
         'src/dugun-notifications.module.js',
+        'src/config.js',
         'src/dugun-notifications.service.js',
     ];
 
