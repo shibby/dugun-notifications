@@ -49,6 +49,10 @@ function DugunNotifications(toaster, dgNotificationsConfig) {
                 showAlert('error', data.errors[i].message, data.errors[i].path);
             }
         }
+        if(data.messages){
+            /** for laravel 4.2 */
+            data = data.messages;
+        }
         if (data) {
             /** this is for laravel5.x validation response. i is name of field. */
             for (var i in data) {
