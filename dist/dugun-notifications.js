@@ -5,6 +5,7 @@ angular.module('dugun.notifications', [
 angular.module('dugun.notifications').constant('dgNotificationsConfig', {
     translations: {
         'ERROR': 'Error',
+        'VALIDATION_ERROR': 'Validation Error',
         'SUCCESS': 'Success',
         'HTTP_500': 'Server error',
         'HTTP_403': 'You do not have permission to do this',
@@ -46,7 +47,7 @@ function DugunNotifications(toaster, dgNotificationsConfig) {
         }
         if (data.errors) {
             for (var i in data.errors) {
-                showAlert('error', data.errors[i].message, data.errors[i].path);
+                showAlert('error', data.errors[i].message, dgNotificationsConfig.translations.VALIDATION_ERROR);
             }
         }
         if(data.messages){
@@ -57,7 +58,7 @@ function DugunNotifications(toaster, dgNotificationsConfig) {
             /** this is for laravel5.x validation response. i is name of field. */
             for (var i in data) {
                 for (var j in data[i]) {
-                    showAlert('error', data[i][j], i);
+                    showAlert('error', data[i][j], dgNotificationsConfig.translations.VALIDATION_ERROR);
                 }
             }
         }
